@@ -1,12 +1,21 @@
 :root {
-    --bg: #f3f7ff;
+    /* Palette */
+    --charcoal-blue: #264653;
+    --verdigris: #2a9d8f;
+    --jasmine: #e9c46a;
+    --sandy-brown: #f4a261;
+    --burnt-peach: #e76f51;
+
+    --bg: #f8f5ef;
     --surface: #ffffff;
-    --text: #1d2433;
-    --muted: #5f6b85;
-    --primary: #4f46e5;
-    --primary-dark: #3d34c2;
-    --border: #e2e8f0;
-    --shadow: 0 14px 40px rgba(25, 35, 58, 0.08);
+    --text: var(--charcoal-blue);
+    --muted: rgba(38, 70, 83, 0.72);
+    --primary: var(--verdigris);
+    --primary-dark: #237a6f;
+    --accent-warm: var(--sandy-brown);
+    --accent-hot: var(--burnt-peach);
+    --border: rgba(38, 70, 83, 0.12);
+    --shadow: 0 14px 40px rgba(38, 70, 83, 0.1);
 }
 
 * {
@@ -19,8 +28,9 @@ body {
     line-height: 1.6;
     color: var(--text);
     background:
-        radial-gradient(circle at top right, #dbe8ff 0%, transparent 40%),
-        linear-gradient(135deg, #eef4ff 0%, var(--bg) 100%);
+        radial-gradient(circle at top right, rgba(233, 196, 106, 0.35) 0%, transparent 42%),
+        radial-gradient(circle at 20% 80%, rgba(244, 162, 97, 0.2) 0%, transparent 45%),
+        linear-gradient(135deg, #fdfbf7 0%, var(--bg) 100%);
     min-height: 100vh;
 }
 
@@ -49,7 +59,7 @@ nav {
     justify-content: center;
     flex-wrap: wrap;
     gap: 8px;
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.85);
     border: 1px solid var(--border);
     border-radius: 999px;
     box-shadow: var(--shadow);
@@ -77,7 +87,12 @@ nav a:hover {
 }
 
 .hero {
-    background: linear-gradient(140deg, #ffffff 0%, #f7f9ff 100%);
+    background: linear-gradient(
+        140deg,
+        #ffffff 0%,
+        rgba(233, 196, 106, 0.12) 50%,
+        rgba(244, 162, 97, 0.08) 100%
+    );
     border: 1px solid var(--border);
     border-radius: 24px;
     padding: clamp(22px, 4vw, 40px);
@@ -110,7 +125,7 @@ nav a:hover {
 }
 
 .button:hover {
-    background: var(--primary-dark);
+    background: var(--accent-hot);
     transform: translateY(-1px);
 }
 
@@ -126,7 +141,7 @@ nav a:hover {
     border: 1px solid var(--border);
     border-radius: 18px;
     padding: 22px;
-    box-shadow: 0 8px 24px rgba(25, 35, 58, 0.06);
+    box-shadow: 0 8px 24px rgba(38, 70, 83, 0.07);
 }
 
 .card h3 {
@@ -136,6 +151,19 @@ nav a:hover {
 .card p {
     margin: 0;
     color: var(--muted);
+}
+
+.card a:not(.button),
+.contact-grid a:not(.button) {
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.card a:not(.button):hover,
+.contact-grid a:not(.button):hover {
+    color: var(--accent-hot);
+    text-decoration: underline;
 }
 
 .meta {
@@ -191,7 +219,7 @@ nav a:hover {
 
 .contact-form input:focus,
 .contact-form textarea:focus {
-    outline: 2px solid rgba(79, 70, 229, 0.28);
+    outline: 2px solid rgba(42, 157, 143, 0.35);
     outline-offset: 1px;
     border-color: var(--primary);
 }
@@ -215,25 +243,47 @@ footer {
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --bg: #0c1020;
-        --surface: #131a2f;
-        --text: #edf2ff;
-        --muted: #b3bed9;
-        --border: #27314f;
+        --bg: #1a2c33;
+        --surface: #213a44;
+        --text: #f4efe4;
+        --muted: rgba(233, 196, 106, 0.65);
+        --border: rgba(233, 196, 106, 0.18);
         --shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
     }
 
     body {
         background:
-            radial-gradient(circle at top right, rgba(99, 102, 241, 0.24) 0%, transparent 40%),
-            linear-gradient(135deg, #0a0f1d 0%, var(--bg) 100%);
+            radial-gradient(circle at top right, rgba(42, 157, 143, 0.22) 0%, transparent 40%),
+            radial-gradient(circle at 15% 85%, rgba(231, 111, 81, 0.12) 0%, transparent 45%),
+            linear-gradient(135deg, #152428 0%, var(--bg) 100%);
     }
 
     nav {
-        background: rgba(19, 26, 47, 0.8);
+        background: rgba(33, 58, 68, 0.92);
+    }
+
+    nav a:hover {
+        background: var(--verdigris);
+        color: #ffffff;
     }
 
     .hero {
-        background: linear-gradient(140deg, #141d35 0%, #10172b 100%);
+        background: linear-gradient(
+            140deg,
+            #1e343d 0%,
+            rgba(38, 70, 83, 0.55) 50%,
+            rgba(42, 157, 143, 0.12) 100%
+        );
+    }
+
+    .button:hover {
+        background: var(--sandy-brown);
+        color: var(--charcoal-blue);
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+        outline: 2px solid rgba(233, 196, 106, 0.35);
+        border-color: var(--jasmine);
     }
 }
