@@ -1,23 +1,22 @@
 /*
   60-30-10 color ratio
-  60% — Platinum #edf2f4 (dominant: page background, breathing room)
-  30% — Lavender Grey #8d99ae (secondary: borders, nav, muted text, cards tone)
-  10% — Space Indigo #2b2d42 (accent: headings, buttons, links, focus)
+  60% — #ebebeb (dominant: page background)
+  30% — #0c2228 (secondary: text, borders, nav tone, structure)
+  10% — #dfcf87 (accent: buttons, hovers, focus, links emphasis)
 */
 
 :root {
-    --platinum: #edf2f4;
-    --lavender-grey: #8d99ae;
-    --space-indigo: #2b2d42;
+    --c60: #ebebeb;
+    --c30: #0c2228;
+    --c10: #dfcf87;
 
-    /* Mapped roles */
-    --bg: var(--platinum);
+    --bg: var(--c60);
     --surface: #ffffff;
-    --text: var(--space-indigo);
-    --muted: var(--lavender-grey);
-    --accent: var(--space-indigo);
-    --border: rgba(141, 153, 174, 0.45);
-    --shadow: 0 14px 40px rgba(43, 45, 66, 0.08);
+    --text: var(--c30);
+    --muted: rgba(12, 34, 40, 0.62);
+    --accent: var(--c10);
+    --border: rgba(12, 34, 40, 0.18);
+    --shadow: 0 14px 40px rgba(12, 34, 40, 0.1);
 }
 
 * {
@@ -29,8 +28,7 @@ body {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     color: var(--text);
-    /* ~60% dominant: platinum fills most of the viewport */
-    background-color: var(--platinum);
+    background-color: var(--bg);
     min-height: 100vh;
 }
 
@@ -43,7 +41,7 @@ header h1 {
     margin: 0;
     font-size: clamp(2rem, 5vw, 3rem);
     letter-spacing: 0.5px;
-    color: var(--accent);
+    color: var(--text);
 }
 
 header p {
@@ -60,8 +58,7 @@ nav {
     justify-content: center;
     flex-wrap: wrap;
     gap: 8px;
-    /* ~30% secondary: lavender-grey band */
-    background: rgba(141, 153, 174, 0.22);
+    background: rgba(12, 34, 40, 0.08);
     border: 1px solid var(--border);
     border-radius: 999px;
     box-shadow: var(--shadow);
@@ -69,7 +66,7 @@ nav {
 }
 
 nav a {
-    color: var(--accent);
+    color: var(--text);
     text-decoration: none;
     font-weight: 600;
     padding: 10px 16px;
@@ -78,9 +75,8 @@ nav a {
 }
 
 nav a:hover {
-    /* 10% accent for interactive emphasis */
     background: var(--accent);
-    color: var(--platinum);
+    color: var(--c30);
 }
 
 .container {
@@ -90,12 +86,11 @@ nav a:hover {
 }
 
 .hero {
-    /* 60% base + 30% lavender wash — indigo only in type/buttons */
     background: linear-gradient(
         140deg,
         #ffffff 0%,
-        var(--platinum) 45%,
-        rgba(141, 153, 174, 0.18) 100%
+        var(--c60) 50%,
+        rgba(12, 34, 40, 0.06) 100%
     );
     border: 1px solid var(--border);
     border-radius: 24px;
@@ -107,7 +102,7 @@ nav a:hover {
     margin: 0;
     font-size: clamp(1.5rem, 3vw, 2.2rem);
     line-height: 1.25;
-    color: var(--accent);
+    color: var(--text);
 }
 
 .hero p {
@@ -120,7 +115,7 @@ nav a:hover {
     display: inline-block;
     text-decoration: none;
     font-weight: 600;
-    color: var(--platinum);
+    color: var(--c30);
     background: var(--accent);
     border-radius: 12px;
     padding: 11px 18px;
@@ -130,8 +125,8 @@ nav a:hover {
 }
 
 .button:hover {
-    background: var(--lavender-grey);
-    color: var(--platinum);
+    background: var(--c30);
+    color: var(--accent);
     transform: translateY(-1px);
 }
 
@@ -147,12 +142,12 @@ nav a:hover {
     border: 1px solid var(--border);
     border-radius: 18px;
     padding: 22px;
-    box-shadow: 0 8px 24px rgba(43, 45, 66, 0.06);
+    box-shadow: 0 8px 24px rgba(12, 34, 40, 0.07);
 }
 
 .card h3 {
     margin: 0 0 10px;
-    color: var(--accent);
+    color: var(--text);
 }
 
 .card p {
@@ -162,15 +157,16 @@ nav a:hover {
 
 .card a:not(.button),
 .contact-grid a:not(.button) {
-    color: var(--accent);
+    color: var(--c30);
     font-weight: 600;
     text-decoration: none;
+    border-bottom: 2px solid var(--accent);
 }
 
 .card a:not(.button):hover,
 .contact-grid a:not(.button):hover {
-    color: var(--lavender-grey);
-    text-decoration: underline;
+    color: var(--text);
+    border-bottom-color: var(--c30);
 }
 
 .meta {
@@ -207,7 +203,7 @@ nav a:hover {
 .contact-form label {
     font-weight: 600;
     font-size: 0.95rem;
-    color: var(--accent);
+    color: var(--text);
 }
 
 .contact-form input,
@@ -227,9 +223,9 @@ nav a:hover {
 
 .contact-form input:focus,
 .contact-form textarea:focus {
-    outline: 2px solid rgba(43, 45, 66, 0.25);
+    outline: 2px solid rgba(223, 207, 135, 0.65);
     outline-offset: 1px;
-    border-color: var(--accent);
+    border-color: var(--c30);
 }
 
 footer {
@@ -251,19 +247,19 @@ footer {
 
 @media (prefers-color-scheme: dark) {
     /*
-      Dark: 60% Space Indigo ground, 30% lavender for chrome, 10% platinum accents
+      Dark: 60% #0c2228 ground, 30% structure via #ebebeb tints, 10% #dfcf87 accent
     */
     :root {
-        --bg: var(--space-indigo);
-        --surface: #323546;
-        --text: var(--platinum);
-        --muted: rgba(141, 153, 174, 0.92);
-        --border: rgba(141, 153, 174, 0.35);
+        --bg: var(--c30);
+        --surface: #15282f;
+        --text: var(--c60);
+        --muted: rgba(235, 235, 235, 0.65);
+        --border: rgba(235, 235, 235, 0.14);
         --shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
     }
 
     body {
-        background-color: var(--space-indigo);
+        background-color: var(--bg);
         color: var(--text);
     }
 
@@ -271,49 +267,56 @@ footer {
     .hero h2,
     .card h3,
     .contact-form label {
-        color: var(--platinum);
+        color: var(--text);
     }
 
     nav {
-        background: rgba(141, 153, 174, 0.15);
+        background: rgba(235, 235, 235, 0.06);
     }
 
     nav a {
-        color: var(--platinum);
+        color: var(--text);
     }
 
     nav a:hover {
-        background: var(--lavender-grey);
-        color: var(--space-indigo);
+        background: var(--accent);
+        color: var(--c30);
     }
 
     .hero {
         background: linear-gradient(
             140deg,
-            #323546 0%,
-            rgba(43, 45, 66, 0.95) 50%,
-            rgba(141, 153, 174, 0.12) 100%
+            #15282f 0%,
+            rgba(12, 34, 40, 0.98) 55%,
+            rgba(223, 207, 135, 0.08) 100%
         );
     }
 
     .button {
-        background: var(--platinum);
-        color: var(--space-indigo);
+        background: var(--accent);
+        color: var(--c30);
     }
 
     .button:hover {
-        background: var(--lavender-grey);
-        color: var(--platinum);
+        background: var(--c60);
+        color: var(--c30);
+    }
+
+    .card a:not(.button),
+    .contact-grid a:not(.button) {
+        color: var(--accent);
+        border-bottom-color: rgba(223, 207, 135, 0.5);
     }
 
     .card a:not(.button):hover,
     .contact-grid a:not(.button):hover {
-        color: var(--platinum);
+        color: var(--c60);
+        border-bottom-color: var(--c60);
     }
 
     .contact-form input:focus,
     .contact-form textarea:focus {
-        outline: 2px solid rgba(237, 242, 244, 0.25);
-        border-color: var(--platinum);
+        outline: 2px solid rgba(223, 207, 135, 0.4);
+        border-color: var(--accent);
     }
 }
