@@ -1,8 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,600;0,700;1,400&display=swap");
+
 /*
-  60-30-10 color ratio
-  60% — #ebebeb (dominant: page background)
-  30% — #0c2228 (secondary: text, borders, nav tone, structure)
-  10% — #dfcf87 (accent: buttons, hovers, focus, links emphasis)
+  Terminal / CLI theme + your palette (60-30-10)
+  60% #ebebeb — page ground, panels
+  30% #0c2228 — type, chrome, borders, structure
+  10% #dfcf87 — prompts, cursor, hovers, CTAs
 */
 
 :root {
@@ -10,103 +12,170 @@
     --c30: #0c2228;
     --c10: #dfcf87;
 
-    --bg: var(--c60);
-    --surface: #ffffff;
     --text: var(--c30);
     --muted: rgba(12, 34, 40, 0.62);
-    --accent: var(--c10);
-    --border: rgba(12, 34, 40, 0.18);
-    --shadow: 0 14px 40px rgba(12, 34, 40, 0.1);
+    --border: rgba(12, 34, 40, 0.22);
+    --font-mono: "JetBrains Mono", ui-monospace, "Cascadia Code", "Consolas", monospace;
+    --shadow-inset: inset 0 1px 0 rgba(255, 255, 255, 0.65);
 }
 
 * {
     box-sizing: border-box;
 }
 
+html {
+    font-size: 16px;
+}
+
 body {
     margin: 0;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.6;
-    color: var(--text);
-    background-color: var(--bg);
     min-height: 100vh;
+    font-family: var(--font-mono);
+    line-height: 1.65;
+    color: var(--text);
+    background-color: var(--c60);
+    /* Light “CRT” scanlines — still mostly #ebebeb */
+    background-image: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(12, 34, 40, 0.03) 2px,
+        rgba(12, 34, 40, 0.03) 3px
+    );
+}
+
+/* Window chrome — 30% bar, 10% accent line */
+body::before {
+    content: "\25CF \25CF \25CF   lex@portfolio:~";
+    display: block;
+    padding: 10px 14px;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    color: var(--c60);
+    background: var(--c30);
+    border-bottom: 3px solid var(--c10);
+    user-select: none;
+}
+
+::selection {
+    background: rgba(223, 207, 135, 0.45);
+    color: var(--c30);
 }
 
 header {
-    text-align: center;
-    padding: 56px 20px 28px;
+    text-align: left;
+    padding: 40px 20px 20px;
+    max-width: 980px;
+    margin: 0 auto;
 }
 
 header h1 {
     margin: 0;
-    font-size: clamp(2rem, 5vw, 3rem);
-    letter-spacing: 0.5px;
-    color: var(--text);
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 700;
+    color: var(--c30);
+}
+
+header h1::before {
+    content: "$ whoami";
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--c10);
+    margin-bottom: 8px;
+    letter-spacing: 0.04em;
 }
 
 header p {
-    margin: 10px 0 0;
+    margin: 12px 0 0;
     color: var(--muted);
-    font-size: 1.05rem;
+    font-size: 0.95rem;
+}
+
+header p::before {
+    content: "// ";
+    color: var(--c10);
 }
 
 nav {
-    max-width: 900px;
+    max-width: 980px;
     margin: 0 auto;
-    padding: 12px;
+    padding: 0 20px 20px;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     flex-wrap: wrap;
-    gap: 8px;
-    background: rgba(12, 34, 40, 0.08);
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    box-shadow: var(--shadow);
-    backdrop-filter: blur(8px);
+    gap: 0;
+    background: transparent;
 }
 
 nav a {
-    color: var(--text);
+    color: var(--c30);
     text-decoration: none;
     font-weight: 600;
-    padding: 10px 16px;
-    border-radius: 999px;
-    transition: background-color 0.2s ease, color 0.2s ease;
+    font-size: 0.85rem;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    margin-left: -1px;
+    background: var(--c60);
+    box-shadow: var(--shadow-inset);
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+nav a:first-child {
+    margin-left: 0;
 }
 
 nav a:hover {
-    background: var(--accent);
+    background: var(--c10);
     color: var(--c30);
 }
 
 .container {
     max-width: 980px;
-    margin: 28px auto 0;
-    padding: 0 20px 40px;
+    margin: 0 auto;
+    padding: 0 20px 48px;
 }
 
 .hero {
-    background: linear-gradient(
-        140deg,
-        #ffffff 0%,
-        var(--c60) 50%,
-        rgba(12, 34, 40, 0.06) 100%
-    );
+    position: relative;
+    background: var(--c60);
     border: 1px solid var(--border);
-    border-radius: 24px;
-    padding: clamp(22px, 4vw, 40px);
-    box-shadow: var(--shadow);
+    border-radius: 0;
+    padding: clamp(20px, 3vw, 32px);
+    box-shadow: var(--shadow-inset);
+}
+
+.hero::before {
+    content: "$ cat README.md";
+    display: block;
+    font-size: 0.75rem;
+    color: var(--c10);
+    margin-bottom: 14px;
+    letter-spacing: 0.02em;
 }
 
 .hero h2 {
     margin: 0;
-    font-size: clamp(1.5rem, 3vw, 2.2rem);
-    line-height: 1.25;
-    color: var(--text);
+    font-size: clamp(1.2rem, 2.5vw, 1.65rem);
+    line-height: 1.35;
+    font-weight: 600;
+    color: var(--c30);
+}
+
+.hero h2::after {
+    content: "_";
+    color: var(--c10);
+    animation: term-blink 1s step-end infinite;
+}
+
+@keyframes term-blink {
+    50% {
+        opacity: 0;
+    }
 }
 
 .hero p {
-    margin: 14px 0 22px;
+    margin: 14px 0 20px;
     color: var(--muted);
     max-width: 62ch;
 }
@@ -115,44 +184,74 @@ nav a:hover {
     display: inline-block;
     text-decoration: none;
     font-weight: 600;
+    font-family: inherit;
+    font-size: 0.88rem;
     color: var(--c30);
-    background: var(--accent);
-    border-radius: 12px;
-    padding: 11px 18px;
-    border: none;
+    background: var(--c10);
+    border-radius: 0;
+    padding: 10px 18px;
+    border: 1px solid var(--c30);
     cursor: pointer;
-    transition: background-color 0.2s ease, transform 0.2s ease, color 0.2s ease;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+.button::before {
+    content: "> ";
+    opacity: 0.85;
 }
 
 .button:hover {
     background: var(--c30);
-    color: var(--accent);
-    transform: translateY(-1px);
+    color: var(--c10);
 }
 
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 18px;
-    margin-top: 22px;
+    gap: 14px;
+    margin-top: 20px;
 }
 
 .card {
-    background: var(--surface);
+    position: relative;
+    background: var(--c60);
     border: 1px solid var(--border);
-    border-radius: 18px;
-    padding: 22px;
-    box-shadow: 0 8px 24px rgba(12, 34, 40, 0.07);
+    border-radius: 0;
+    padding: 20px 20px 20px 22px;
+    box-shadow: var(--shadow-inset);
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--border);
+}
+
+.card:hover::before {
+    background: var(--c10);
 }
 
 .card h3 {
     margin: 0 0 10px;
-    color: var(--text);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--c30);
+}
+
+.card:not(.skill-card) h3::before {
+    content: "## ";
+    color: var(--muted);
+    font-weight: 400;
 }
 
 .card p {
     margin: 0;
     color: var(--muted);
+    font-size: 0.92rem;
 }
 
 .card a:not(.button),
@@ -160,35 +259,48 @@ nav a:hover {
     color: var(--c30);
     font-weight: 600;
     text-decoration: none;
-    border-bottom: 2px solid var(--accent);
+    border-bottom: 1px dashed rgba(12, 34, 40, 0.35);
 }
 
 .card a:not(.button):hover,
 .contact-grid a:not(.button):hover {
-    color: var(--text);
-    border-bottom-color: var(--c30);
+    color: var(--c30);
+    border-bottom-color: var(--c10);
+    background: rgba(223, 207, 135, 0.25);
 }
 
 .meta {
     margin-top: 10px;
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     color: var(--muted);
 }
 
+.meta::before {
+    content: "// ";
+    color: var(--c10);
+}
+
 .skill-card {
-    text-align: center;
+    text-align: left;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    min-height: 170px;
-    gap: 12px;
+    align-items: flex-start;
+    min-height: 160px;
+    gap: 10px;
+}
+
+.skill-card h3::before {
+    content: "$ ";
+    color: var(--c10);
+    font-weight: 600;
 }
 
 .skill-icon {
-    width: 56px;
-    height: 56px;
+    width: 48px;
+    height: 48px;
     object-fit: contain;
+    filter: grayscale(0.2) contrast(1.05);
 }
 
 .contact-grid {
@@ -202,18 +314,25 @@ nav a:hover {
 
 .contact-form label {
     font-weight: 600;
-    font-size: 0.95rem;
-    color: var(--text);
+    font-size: 0.85rem;
+    color: var(--c30);
+}
+
+.contact-form label::before {
+    content: "> ";
+    color: var(--c10);
 }
 
 .contact-form input,
 .contact-form textarea {
     font: inherit;
-    color: var(--text);
-    background: var(--surface);
+    font-size: 0.9rem;
+    color: var(--c30);
+    background: var(--c60);
     border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 12px 14px;
+    border-radius: 0;
+    padding: 11px 12px;
+    box-shadow: inset 0 1px 2px rgba(12, 34, 40, 0.06);
 }
 
 .contact-form textarea {
@@ -223,100 +342,42 @@ nav a:hover {
 
 .contact-form input:focus,
 .contact-form textarea:focus {
-    outline: 2px solid rgba(223, 207, 135, 0.65);
-    outline-offset: 1px;
+    outline: none;
     border-color: var(--c30);
+    box-shadow: 0 0 0 2px rgba(223, 207, 135, 0.65);
 }
 
 footer {
-    text-align: center;
-    padding: 26px 16px;
+    text-align: left;
+    padding: 24px 20px 32px;
+    max-width: 980px;
+    margin: 0 auto;
+    font-size: 0.8rem;
     color: var(--muted);
+    border-top: 1px solid var(--border);
+}
+
+footer::before {
+    content: "$ exit";
+    display: block;
+    color: var(--c10);
+    margin-bottom: 8px;
+    font-size: 0.72rem;
 }
 
 @media (max-width: 640px) {
     nav {
-        border-radius: 18px;
+        flex-direction: column;
     }
 
     nav a {
+        margin-left: 0;
         width: 100%;
-        text-align: center;
-    }
-}
-
-@media (prefers-color-scheme: dark) {
-    /*
-      Dark: 60% #0c2228 ground, 30% structure via #ebebeb tints, 10% #dfcf87 accent
-    */
-    :root {
-        --bg: var(--c30);
-        --surface: #15282f;
-        --text: var(--c60);
-        --muted: rgba(235, 235, 235, 0.65);
-        --border: rgba(235, 235, 235, 0.14);
-        --shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
+        text-align: left;
+        border: 1px solid var(--border);
     }
 
-    body {
-        background-color: var(--bg);
-        color: var(--text);
-    }
-
-    header h1,
-    .hero h2,
-    .card h3,
-    .contact-form label {
-        color: var(--text);
-    }
-
-    nav {
-        background: rgba(235, 235, 235, 0.06);
-    }
-
-    nav a {
-        color: var(--text);
-    }
-
-    nav a:hover {
-        background: var(--accent);
-        color: var(--c30);
-    }
-
-    .hero {
-        background: linear-gradient(
-            140deg,
-            #15282f 0%,
-            rgba(12, 34, 40, 0.98) 55%,
-            rgba(223, 207, 135, 0.08) 100%
-        );
-    }
-
-    .button {
-        background: var(--accent);
-        color: var(--c30);
-    }
-
-    .button:hover {
-        background: var(--c60);
-        color: var(--c30);
-    }
-
-    .card a:not(.button),
-    .contact-grid a:not(.button) {
-        color: var(--accent);
-        border-bottom-color: rgba(223, 207, 135, 0.5);
-    }
-
-    .card a:not(.button):hover,
-    .contact-grid a:not(.button):hover {
-        color: var(--c60);
-        border-bottom-color: var(--c60);
-    }
-
-    .contact-form input:focus,
-    .contact-form textarea:focus {
-        outline: 2px solid rgba(223, 207, 135, 0.4);
-        border-color: var(--accent);
+    nav a + a {
+        margin-top: -1px;
     }
 }
