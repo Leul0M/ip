@@ -1,21 +1,23 @@
-:root {
-    /* Palette */
-    --charcoal-blue: #264653;
-    --verdigris: #2a9d8f;
-    --jasmine: #e9c46a;
-    --sandy-brown: #f4a261;
-    --burnt-peach: #e76f51;
+/*
+  60-30-10 color ratio
+  60% — Platinum #edf2f4 (dominant: page background, breathing room)
+  30% — Lavender Grey #8d99ae (secondary: borders, nav, muted text, cards tone)
+  10% — Space Indigo #2b2d42 (accent: headings, buttons, links, focus)
+*/
 
-    --bg: #f8f5ef;
+:root {
+    --platinum: #edf2f4;
+    --lavender-grey: #8d99ae;
+    --space-indigo: #2b2d42;
+
+    /* Mapped roles */
+    --bg: var(--platinum);
     --surface: #ffffff;
-    --text: var(--charcoal-blue);
-    --muted: rgba(38, 70, 83, 0.72);
-    --primary: var(--verdigris);
-    --primary-dark: #237a6f;
-    --accent-warm: var(--sandy-brown);
-    --accent-hot: var(--burnt-peach);
-    --border: rgba(38, 70, 83, 0.12);
-    --shadow: 0 14px 40px rgba(38, 70, 83, 0.1);
+    --text: var(--space-indigo);
+    --muted: var(--lavender-grey);
+    --accent: var(--space-indigo);
+    --border: rgba(141, 153, 174, 0.45);
+    --shadow: 0 14px 40px rgba(43, 45, 66, 0.08);
 }
 
 * {
@@ -27,10 +29,8 @@ body {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     color: var(--text);
-    background:
-        radial-gradient(circle at top right, rgba(233, 196, 106, 0.35) 0%, transparent 42%),
-        radial-gradient(circle at 20% 80%, rgba(244, 162, 97, 0.2) 0%, transparent 45%),
-        linear-gradient(135deg, #fdfbf7 0%, var(--bg) 100%);
+    /* ~60% dominant: platinum fills most of the viewport */
+    background-color: var(--platinum);
     min-height: 100vh;
 }
 
@@ -43,6 +43,7 @@ header h1 {
     margin: 0;
     font-size: clamp(2rem, 5vw, 3rem);
     letter-spacing: 0.5px;
+    color: var(--accent);
 }
 
 header p {
@@ -59,7 +60,8 @@ nav {
     justify-content: center;
     flex-wrap: wrap;
     gap: 8px;
-    background: rgba(255, 255, 255, 0.85);
+    /* ~30% secondary: lavender-grey band */
+    background: rgba(141, 153, 174, 0.22);
     border: 1px solid var(--border);
     border-radius: 999px;
     box-shadow: var(--shadow);
@@ -67,7 +69,7 @@ nav {
 }
 
 nav a {
-    color: var(--text);
+    color: var(--accent);
     text-decoration: none;
     font-weight: 600;
     padding: 10px 16px;
@@ -76,8 +78,9 @@ nav a {
 }
 
 nav a:hover {
-    background: var(--primary);
-    color: #ffffff;
+    /* 10% accent for interactive emphasis */
+    background: var(--accent);
+    color: var(--platinum);
 }
 
 .container {
@@ -87,11 +90,12 @@ nav a:hover {
 }
 
 .hero {
+    /* 60% base + 30% lavender wash — indigo only in type/buttons */
     background: linear-gradient(
         140deg,
         #ffffff 0%,
-        rgba(233, 196, 106, 0.12) 50%,
-        rgba(244, 162, 97, 0.08) 100%
+        var(--platinum) 45%,
+        rgba(141, 153, 174, 0.18) 100%
     );
     border: 1px solid var(--border);
     border-radius: 24px;
@@ -103,6 +107,7 @@ nav a:hover {
     margin: 0;
     font-size: clamp(1.5rem, 3vw, 2.2rem);
     line-height: 1.25;
+    color: var(--accent);
 }
 
 .hero p {
@@ -115,17 +120,18 @@ nav a:hover {
     display: inline-block;
     text-decoration: none;
     font-weight: 600;
-    color: #ffffff;
-    background: var(--primary);
+    color: var(--platinum);
+    background: var(--accent);
     border-radius: 12px;
     padding: 11px 18px;
     border: none;
     cursor: pointer;
-    transition: background-color 0.2s ease, transform 0.2s ease;
+    transition: background-color 0.2s ease, transform 0.2s ease, color 0.2s ease;
 }
 
 .button:hover {
-    background: var(--accent-hot);
+    background: var(--lavender-grey);
+    color: var(--platinum);
     transform: translateY(-1px);
 }
 
@@ -141,11 +147,12 @@ nav a:hover {
     border: 1px solid var(--border);
     border-radius: 18px;
     padding: 22px;
-    box-shadow: 0 8px 24px rgba(38, 70, 83, 0.07);
+    box-shadow: 0 8px 24px rgba(43, 45, 66, 0.06);
 }
 
 .card h3 {
     margin: 0 0 10px;
+    color: var(--accent);
 }
 
 .card p {
@@ -155,14 +162,14 @@ nav a:hover {
 
 .card a:not(.button),
 .contact-grid a:not(.button) {
-    color: var(--primary);
+    color: var(--accent);
     font-weight: 600;
     text-decoration: none;
 }
 
 .card a:not(.button):hover,
 .contact-grid a:not(.button):hover {
-    color: var(--accent-hot);
+    color: var(--lavender-grey);
     text-decoration: underline;
 }
 
@@ -200,6 +207,7 @@ nav a:hover {
 .contact-form label {
     font-weight: 600;
     font-size: 0.95rem;
+    color: var(--accent);
 }
 
 .contact-form input,
@@ -219,9 +227,9 @@ nav a:hover {
 
 .contact-form input:focus,
 .contact-form textarea:focus {
-    outline: 2px solid rgba(42, 157, 143, 0.35);
+    outline: 2px solid rgba(43, 45, 66, 0.25);
     outline-offset: 1px;
-    border-color: var(--primary);
+    border-color: var(--accent);
 }
 
 footer {
@@ -242,48 +250,70 @@ footer {
 }
 
 @media (prefers-color-scheme: dark) {
+    /*
+      Dark: 60% Space Indigo ground, 30% lavender for chrome, 10% platinum accents
+    */
     :root {
-        --bg: #1a2c33;
-        --surface: #213a44;
-        --text: #f4efe4;
-        --muted: rgba(233, 196, 106, 0.65);
-        --border: rgba(233, 196, 106, 0.18);
+        --bg: var(--space-indigo);
+        --surface: #323546;
+        --text: var(--platinum);
+        --muted: rgba(141, 153, 174, 0.92);
+        --border: rgba(141, 153, 174, 0.35);
         --shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
     }
 
     body {
-        background:
-            radial-gradient(circle at top right, rgba(42, 157, 143, 0.22) 0%, transparent 40%),
-            radial-gradient(circle at 15% 85%, rgba(231, 111, 81, 0.12) 0%, transparent 45%),
-            linear-gradient(135deg, #152428 0%, var(--bg) 100%);
+        background-color: var(--space-indigo);
+        color: var(--text);
+    }
+
+    header h1,
+    .hero h2,
+    .card h3,
+    .contact-form label {
+        color: var(--platinum);
     }
 
     nav {
-        background: rgba(33, 58, 68, 0.92);
+        background: rgba(141, 153, 174, 0.15);
+    }
+
+    nav a {
+        color: var(--platinum);
     }
 
     nav a:hover {
-        background: var(--verdigris);
-        color: #ffffff;
+        background: var(--lavender-grey);
+        color: var(--space-indigo);
     }
 
     .hero {
         background: linear-gradient(
             140deg,
-            #1e343d 0%,
-            rgba(38, 70, 83, 0.55) 50%,
-            rgba(42, 157, 143, 0.12) 100%
+            #323546 0%,
+            rgba(43, 45, 66, 0.95) 50%,
+            rgba(141, 153, 174, 0.12) 100%
         );
     }
 
+    .button {
+        background: var(--platinum);
+        color: var(--space-indigo);
+    }
+
     .button:hover {
-        background: var(--sandy-brown);
-        color: var(--charcoal-blue);
+        background: var(--lavender-grey);
+        color: var(--platinum);
+    }
+
+    .card a:not(.button):hover,
+    .contact-grid a:not(.button):hover {
+        color: var(--platinum);
     }
 
     .contact-form input:focus,
     .contact-form textarea:focus {
-        outline: 2px solid rgba(233, 196, 106, 0.35);
-        border-color: var(--jasmine);
+        outline: 2px solid rgba(237, 242, 244, 0.25);
+        border-color: var(--platinum);
     }
 }
