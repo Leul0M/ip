@@ -360,6 +360,66 @@ nav a:hover {
     align-items: start;
 }
 
+.contact-channels {
+    margin-top: 4px;
+}
+
+.contact-channels .contact-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 0;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    text-decoration: none;
+    color: var(--c30);
+}
+
+.contact-channels .contact-row:last-child {
+    border-bottom: none;
+    padding-bottom: 4px;
+}
+
+.contact-channels .contact-row:hover {
+    background: rgba(223, 207, 135, 0.18);
+}
+
+.contact-channels .contact-row:hover .contact-row-text {
+    border-bottom-color: transparent;
+}
+
+.contact-grid .contact-channels a.contact-row,
+.contact-grid .contact-channels a.contact-row:hover {
+    border-bottom: 1px solid var(--border);
+    text-decoration: none;
+}
+
+.contact-grid .contact-channels a.contact-row:last-child,
+.contact-grid .contact-channels a.contact-row:last-child:hover {
+    border-bottom: none;
+}
+
+.contact-icon {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.contact-row-text {
+    font-size: 0.92rem;
+    color: var(--muted);
+}
+
+.contact-row-text strong {
+    display: block;
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--c30);
+    margin-bottom: 2px;
+}
+
 .contact-form {
     display: grid;
     gap: 12px;
