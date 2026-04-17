@@ -1,12 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resume</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="page-resume">
 
-<header><h1>Resume</h1></header>
+<header>
+    <h1>Resume</h1>
+    <p>Education, direction, and tools I work with.</p>
+</header>
 
 <nav>
     <a href="index.html">Home</a>
@@ -16,13 +21,44 @@
     <a href="contact.html">Contact</a>
 </nav>
 
-<div class="container">
-    <div class="card">
-        <h2>Education</h2>
-        <p>Computer Science Student</p>
+<div class="container resume-page">
+    <div class="grid resume-stack">
+        <article class="card">
+            <h3>&#x1F393; Education</h3>
+            <p><strong>Unity University</strong></p>
+            <p>I am studying computer science with a focus on core CS fundamentals, software development practices, and building real projects alongside coursework.</p>
+            <p class="meta">Bachelor's Degree in Computer Science (In Progress)</p>
+        </article>
 
-        <h2>Experience</h2>
-        <p>Building CLI tools, mobile apps, and learning backend systems.</p>
+        <article class="card">
+            <h3>&#x1F9ED; Career Objective</h3>
+            <p>Aspiring software developer focused on backend systems and mobile applications.</p>
+            <p>Currently building CLI tools in Go, learning Flutter for mobile development, and exploring Unity for interactive applications.</p>
+            <p>Interested in scalable systems and practical software engineering.</p>
+        </article>
+
+        <article class="card">
+            <h3>&#x1F6E0;&#xFE0F; Technical Skills</h3>
+            <h4>Languages</h4>
+            <p>Go, Dart, JavaScript</p>
+            <h4>Frameworks &amp; Tools</h4>
+            <p>Flutter, Unity</p>
+            <h4>Web</h4>
+            <p>HTML, CSS</p>
+            <h4>Systems</h4>
+            <p>Linux, CLI tools</p>
+            <h4>Database</h4>
+            <p>SQLite</p>
+            <p class="meta">Structure matters more than quantity.</p>
+        </article>
+
+        <article class="card">
+            <h3>&#x1F4DA; Currently Learning</h3>
+            <ul class="resume-list">
+                <li>Backend Development (APIs, system design basics)</li>
+                <li>Unity (game development fundamentals)</li>
+            </ul>
+        </article>
     </div>
 </div>
 
