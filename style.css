@@ -154,6 +154,29 @@ nav a:hover {
     letter-spacing: 0.02em;
 }
 
+.hero-content {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.hero-image {
+    flex: 0 0 180px;
+    width: 180px;
+}
+
+.hero-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    box-shadow: var(--shadow-inset);
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
 .hero h2 {
     margin: 0;
     font-size: clamp(1.2rem, 2.5vw, 1.65rem);
